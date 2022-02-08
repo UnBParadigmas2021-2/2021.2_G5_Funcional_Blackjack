@@ -8,7 +8,7 @@ values = concat [['1'..'9'], ['A', 'J', 'Q', 'K']]
 
 deck = [(x, y) | x <- suits, y <- values]
 
--- ToDo: Remover carta aleatoria e atualizar o valor do baralho 
+-- ToDo: Remover carta aleatoria e atualizar o valor do baralho
 -- ToDo: Comparar valores das cartas do jogador com as carta da mesa
 -- ToDo: Valor do baralho deve ser reiniciado a cada partida
 -- ToDo: Adicionar possibilidade do jogador apostar valor do pote e atualizar o mesmo
