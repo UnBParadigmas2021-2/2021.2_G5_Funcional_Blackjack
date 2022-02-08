@@ -14,3 +14,4 @@ deck = [(x, y) | x <- suits, y <- values]
 -- ToDo: Jogador pode apostar normal, dobrar valor da aposta ou passar
 -- ToDo: Jogador pode escerrar jogo no final da partida ou assim que falir
 -- ToDo (Opcional): Valor de aposta pode ser variavel
+-- ToDo (Opcional): Adicionar ASSCI Art para quando o jogo encerrar
