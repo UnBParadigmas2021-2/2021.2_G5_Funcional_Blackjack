@@ -20,6 +20,14 @@ doubleBet bet = (bet * 2)
 chooseWinner :: IO()
 chooseWinner = putStrLn $ "Voceh venceu!" -- Implementar função de definir vencedor
 
+-- ToDo: Criar menu
+  -- Inicar jogo
+  -- Pedir carta
+  -- Apostar
+  -- Passar vez
+  -- Parar
+  -- Finalizar jogo
+  -- (Opcional) Dobrar aposta
 -- ToDo: Remover carta aleatoria e atualizar o valor do baralho
 -- ToDo: Comparar valores das cartas do jogador com as carta da mesa
 -- ToDo: Valor do baralho deve ser reiniciado a cada partida
