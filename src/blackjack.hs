@@ -1,4 +1,4 @@
-module Blackjack
+module Blackjack (startGame, bet, doubleBet, chooseWinner) where
 
 -- Criando baralho
 chips = 1000
@@ -7,6 +7,18 @@ suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 values = concat [['1'..'9'], ['A', 'J', 'Q', 'K']]
 
 deck = [(x, y) | x <- suits, y <- values]
+
+startGame :: Int
+startGame = 2000 -- Implementar função de iniciar jogo
+
+bet :: Int -> Int
+bet valor = valor -- Implementar função de apostar
+
+doubleBet :: Int -> Int
+doubleBet bet = (bet * 2)
+
+chooseWinner :: IO()
+chooseWinner = putStrLn $ "Voceh venceu!" -- Implementar função de definir vencedor
 
 -- ToDo: Remover carta aleatoria e atualizar o valor do baralho
 -- ToDo: Comparar valores das cartas do jogador com as carta da mesa
