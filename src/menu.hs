@@ -56,7 +56,6 @@ inGameMenu bet = do {
 
     genOne <- getStdGen;  
     initialHand genOne;
-    putStrLn $"fora da função: " ++ show hand;
     putStrLn $"Escolha sua acao: ";
     putStrLn $"1 - Dobrar aposta";
     putStrLn $"2 - Comprar carta";
@@ -80,4 +79,5 @@ initialHand genOne = do
     let (randOne, newGen) = randomR (1,52) genOne :: (Int, StdGen)
         (randTwo, anotherGen) = randomR (1,52) newGen :: (Int, StdGen)
         hand = [deck !! randOne] ++ [deck !! randTwo]
-    putStrLn $ "Sua mão " ++ show hand
+    putStrLn $ "Total da mão " ++ show((randOne `mod` 13) + (randTwo `mod` 13) + 2 ) ++ " " ++ show hand
+    -- putStrLn $ "Total da mão " ++ show deck
