@@ -1,25 +1,26 @@
--- import deck
-
 import System.IO
+import System.Random
 import Control.Monad
 import Blackjack
+import Data.Typeable
+
 
 main :: IO ()
 main = mainMenu
 
 mainMenu :: IO()
-mainMenu = do { 
+mainMenu = do{ 
     putStrLn $"Menu Principal do Jogo: ";
     putStrLn $"1 - Iniciar partida";
     putStrLn $"2 - Fechar";
     option <- getLine;
     case option of 
         "1" -> startGameMenu Blackjack.startGame;
-        "2" -> putStrLn $"O jogo serah finalizado...";
+        "2" -> putStrLn $"O jogo sera finalizado...";
 }
 
 startGameMenu :: Int -> IO()
-startGameMenu money = do { 
+startGameMenu money = do {    
     putStrLn $"Escolha sua acao: ";
     putStrLn $"1 - Apostar 10";
     putStrLn $"2 - Apostar 50";
@@ -51,6 +52,11 @@ startGameMenu money = do {
 
 inGameMenu :: Int -> IO()
 inGameMenu bet = do {
+    
+
+    genOne <- getStdGen;  
+    initialHand genOne;
+    putStrLn $"fora da função: " ++ show hand;
     putStrLn $"Escolha sua acao: ";
     putStrLn $"1 - Dobrar aposta";
     putStrLn $"2 - Comprar carta";
@@ -68,3 +74,10 @@ inGameMenu bet = do {
             chooseWinner
             mainMenu
 }
+
+initialHand :: StdGen -> IO ()
+initialHand genOne = do
+    let (randOne, newGen) = randomR (1,52) genOne :: (Int, StdGen)
+        (randTwo, anotherGen) = randomR (1,52) newGen :: (Int, StdGen)
+        hand = [deck !! randOne] ++ [deck !! randTwo]
+    putStrLn $ "Sua mão " ++ show hand

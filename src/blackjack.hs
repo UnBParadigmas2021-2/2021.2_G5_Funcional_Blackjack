@@ -1,4 +1,7 @@
-module Blackjack (startGame, bet, doubleBet, chooseWinner) where
+-- import System.Random
+
+module Blackjack (startGame, bet, doubleBet, chooseWinner,deck) where
+
 
 -- Criando baralho
 chips = 1000
@@ -11,6 +14,7 @@ deck = [(x, y) | x <- suits, y <- values]
 startGame :: Int
 startGame = 2000 -- Implementar função de iniciar jogo
 
+
 bet :: Int -> Int
 bet valor = valor -- Implementar função de apostar
 
@@ -18,7 +22,7 @@ doubleBet :: Int -> Int
 doubleBet bet = (bet * 2)
 
 chooseWinner :: IO()
-chooseWinner = putStrLn $ "Voceh venceu!" -- Implementar função de definir vencedor
+chooseWinner = putStrLn $ "Você venceu!" -- Implementar função de definir vencedor
 
 -- ToDo: Criar menu
   -- Inicar jogo
@@ -29,6 +33,8 @@ chooseWinner = putStrLn $ "Voceh venceu!" -- Implementar função de definir ven
   -- Finalizar jogo
   -- (Opcional) Dobrar aposta
 -- ToDo: Remover carta aleatoria e atualizar o valor do baralho
+  --Selecionar carta aleatória.
+  --Atualizar Baralho.
 -- ToDo: Comparar valores das cartas do jogador com as carta da mesa
 -- ToDo: Valor do baralho deve ser reiniciado a cada partida
 -- ToDo: Adicionar possibilidade do jogador apostar valor do pote e atualizar o mesmo
