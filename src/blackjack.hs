@@ -1,28 +1,17 @@
 -- import System.Random
 
-module Blackjack (startGame, bet, doubleBet, chooseWinner,deck) where
+module Blackjack (deck) where
 
 
 -- Criando baralho
-chips = 1000
 
+suits :: [[Char]]
 suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-values = concat [['1'..'9'], ['A', 'J', 'Q', 'K']]
+values :: [Char]
+values = ['1'..'9'] ++ ['A', 'J', 'Q', 'K']
 
+deck :: [([Char], Char)]
 deck = [(x, y) | x <- suits, y <- values]
-
-startGame :: Int
-startGame = 2000 -- Implementar função de iniciar jogo
-
-
-bet :: Int -> Int
-bet valor = valor -- Implementar função de apostar
-
-doubleBet :: Int -> Int
-doubleBet bet = (bet * 2)
-
-chooseWinner :: IO()
-chooseWinner = putStrLn $ "Você venceu!" -- Implementar função de definir vencedor
 
 -- ToDo: Criar menu
   -- Inicar jogo
