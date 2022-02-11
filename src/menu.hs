@@ -17,12 +17,12 @@ mainMenu money = do
       putStrLn "1 - Iniciar partida"
       putStrLn "2 - Fechar\n"
       option <- getLine
-      putStrLn $ "Valor" ++ show money
       case option of
         "1" -> startGameMenu money
         "2" -> putStrLn "O jogo serah finalizado...\n"
 
 startGameMenu money = do
+  putStrLn $ "Seu dinheiro: " ++ show money
   putStrLn "Escolha sua acao: "
   putStrLn "1 - Apostar 10"
   putStrLn "2 - Apostar 50"
@@ -33,23 +33,43 @@ startGameMenu money = do
   option <- getLine
   case option of
     "1" -> do
-      putStrLn $ "Apostando: " ++ show 10
-      inGameMenu 10 (money -10)
+      if money <= 0
+        then 
+          mainMenu money
+      else do
+        putStrLn $ "Apostando: " ++ show 10
+        inGameMenu 10 (money -10)
     "2" -> do
-      putStrLn $ "Apostando: " ++ show 50
-      inGameMenu 50 (money - 50)
+      if money <= 0
+        then 
+          mainMenu money
+      else do
+        putStrLn $ "Apostando: " ++ show 50
+        inGameMenu 50 (money - 50)
     "3" -> do
-      putStrLn $ "Apostando: " ++ show 100
-      inGameMenu 100 (money - 100)
+      if money <= 0
+        then 
+          mainMenu money
+      else do
+        putStrLn $ "Apostando: " ++ show 100
+        inGameMenu 100 (money - 100)
     "4" -> do
-      putStrLn $ "Apostando: " ++ show 250
-      inGameMenu 250 (money - 250)
+      if money <= 0
+        then 
+          mainMenu money
+      else do
+        putStrLn $ "Apostando: " ++ show 250
+        inGameMenu 250 (money - 250)
     "5" -> do
-      putStrLn $ "Apostando: " ++ show 500
-      inGameMenu 500 (money - 500)
+      if money <= 0
+        then 
+          mainMenu money
+      else do
+        putStrLn $ "Apostando: " ++ show 500
+        inGameMenu 500 (money - 500)
     "6" -> do
-      putStrLn "Voltando para o menu...\n"
-      mainMenu money
+        putStrLn "Voltando para o menu...\n"
+        mainMenu money
 
 inGameMenu :: Int -> Int -> IO ()
 inGameMenu bet totalMoney = do
@@ -60,8 +80,8 @@ inGameMenu bet totalMoney = do
   option <- getLine
   case option of
     "1" -> do
-      putStrLn $ "Dobrando aposta... Valor atual: " ++ show (bet * 2)
-      inGameMenu (bet * 2) (totalMoney - bet)
+        putStrLn $ "Dobrando aposta... Valor atual: " ++ show (bet * 2)
+        inGameMenu (bet * 2) (totalMoney - bet)
     "2" -> do
       putStrLn $ "Valor Total: " ++ show totalMoney
       inGameMenu bet totalMoney

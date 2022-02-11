@@ -2,7 +2,6 @@
 
 module Blackjack (deck) where
 
-
 -- Criando baralho
 
 suits :: [[Char]]
