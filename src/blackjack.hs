@@ -1,24 +1,23 @@
-module Blackjack (startGame, bet, doubleBet, chooseWinner) where
+module Blackjack (startGame, doubleBet) where
 
 -- Criando baralho
-chips = 1000
 
+suits :: [[Char]]
 suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-values = concat [['1'..'9'], ['A', 'J', 'Q', 'K']]
+values :: [Char]
+values = ['1'..'9'] ++ ['A', 'J', 'Q', 'K']
 
+deck :: [([Char], Char)]
 deck = [(x, y) | x <- suits, y <- values]
 
-startGame :: Int
+startGame :: Integer
 startGame = 2000 -- Implementar função de iniciar jogo
 
 bet :: Int -> Int
 bet valor = valor -- Implementar função de apostar
 
-doubleBet :: Int -> Int
-doubleBet bet = (bet * 2)
-
-chooseWinner :: IO()
-chooseWinner = putStrLn $ "Voceh venceu!" -- Implementar função de definir vencedor
+doubleBet :: Num a => a -> a
+doubleBet bet = bet * 2
 
 -- ToDo: Criar menu
   -- Inicar jogo
