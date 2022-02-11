@@ -1,8 +1,9 @@
--- import deck
+import System.IO
+import System.Random
+import Control.Monad
+import Blackjack
+import Data.Typeable
 
-import Blackjack ()
-import Control.Monad ()
-import System.IO ()
 
 main :: IO ()
 main = mainMenu 2000
@@ -67,3 +68,12 @@ inGameMenu bet totalMoney = do
     "3" -> do
       putStrLn "Fechando mao...\n"
       mainMenu totalMoney
+
+
+initialHand :: StdGen -> IO ()
+initialHand genOne = do
+    let (randOne, newGen) = randomR (1,52) genOne :: (Int, StdGen)
+        (randTwo, anotherGen) = randomR (1,52) newGen :: (Int, StdGen)
+        hand = [deck !! randOne] ++ [deck !! randTwo]
+    putStrLn $ "Total da mão " ++ show((randOne `mod` 13) + (randTwo `mod` 13) + 2 ) ++ " " ++ show hand
+    -- putStrLn $ "Total da mão " ++ show deck
