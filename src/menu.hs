@@ -116,17 +116,32 @@ inGameMenu bet totalMoney playerHand dealerHand deckShuffled counter = do
       let _playerHand = (deckShuffled !! (counter + 1)) : playerHand
       let _deckShuffled = drop (counter + 1) deckShuffled
 
-      inGameMenu bet totalMoney _playerHand dealerHand _deckShuffled (counter + 1)
+      let handValuePlayer = getHandValue _playerHand
+      let handValueDealer = getHandValue dealerHand
+      if handValueDealer < handValuePlayer
+        then do
+          let _dealerHand = (deckShuffled !! (counter + 1)) : dealerHand
+          let _deckShuffled = drop (counter + 1) deckShuffled
+          inGameMenu bet totalMoney _playerHand _dealerHand _deckShuffled (counter + 1)
+        else do
+          inGameMenu bet totalMoney _playerHand dealerHand _deckShuffled (counter + 1)
+
     "3" -> do
       putStrLn "Fechando mao...\n"
 
-      let _dealerHand = (deckShuffled !! (counter + 1)) : dealerHand
-      let _deckShuffled = drop (counter + 1) deckShuffled
-
-      compareHandValuesOverOrEqual21 playerHand _dealerHand bet totalMoney
-      compareHandValues playerHand _dealerHand bet totalMoney
-
-      mainMenu totalMoney
+      let handValuePlayer = getHandValue playerHand
+      let handValueDealer = getHandValue dealerHand
+      if handValueDealer < handValuePlayer
+        then do
+          let _dealerHand = (deckShuffled !! (counter + 1)) : dealerHand
+          let _deckShuffled = drop (counter + 1) deckShuffled
+          compareHandValuesOverOrEqual21 playerHand _dealerHand bet totalMoney
+          compareHandValues playerHand _dealerHand bet totalMoney
+          mainMenu totalMoney
+        else do
+          compareHandValuesOverOrEqual21 playerHand dealerHand bet totalMoney
+          compareHandValues playerHand dealerHand bet totalMoney
+          mainMenu totalMoney
 
 compareHandValuesOverOrEqual21 :: [([Char], Char)] -> [([Char], Char)] -> Int -> Int -> IO ()
 compareHandValuesOverOrEqual21 hand dealerHand bet totalMoney = do
