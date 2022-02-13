@@ -45,37 +45,42 @@ startGameMenu money = do
 
   case option of
     "1" -> do
-      if money <= 0
-        then 
+      if (money - 10) < 0
+        then do
+          putStrLn "Dinheiro insuficiente para a aposta minima. Voltando para o menu principal..." 
           mainMenu money
       else do
         putStrLn $ "Apostando: " ++ show 10
         inGameMenu 10 (money -10) playerHand dealerHand _deckShuffled counter
     "2" -> do
-      if money <= 0
-        then 
-          mainMenu money
+      if (money - 50) < 0
+        then do
+          putStrLn "Dinheiro insuficiente!" 
+          startGameMenu money
       else do
         putStrLn $ "Apostando: " ++ show 50
         inGameMenu 50 (money - 50) playerHand dealerHand _deckShuffled counter
     "3" -> do
-      if money <= 0
-        then 
-          mainMenu money
+      if (money - 100) < 0
+        then do
+          putStrLn "Dinheiro insuficiente!" 
+          startGameMenu money
       else do
         putStrLn $ "Apostando: " ++ show 100
         inGameMenu 100 (money - 100) playerHand dealerHand _deckShuffled counter
     "4" -> do
-      if money <= 0
-        then 
-          mainMenu money
+      if (money - 250) < 0
+        then do
+          putStrLn "Dinheiro insuficiente!" 
+          startGameMenu money
       else do
         putStrLn $ "Apostando: " ++ show 250
         inGameMenu 250 (money - 250) playerHand dealerHand _deckShuffled counter
     "5" -> do
-      if money <= 0
-        then 
-          mainMenu money
+      if (money - 500) < 0
+        then do
+          putStrLn "Dinheiro insuficiente!" 
+          startGameMenu money
       else do
         putStrLn $ "Apostando: " ++ show 500
         inGameMenu 500 (money - 500) playerHand dealerHand _deckShuffled counter
@@ -89,7 +94,7 @@ inGameMenu bet totalMoney playerHand dealerHand deckShuffled counter = do
   putStrLn $ "mão do dealer " ++ show dealerHand
 
   compareHandValues playerHand dealerHand bet totalMoney
-
+  putStrLn $ "Seu dinheiro: " ++ show totalMoney
   putStrLn "Escolha sua acao: "
   putStrLn "1 - Dobrar aposta"
   putStrLn "2 - Comprar carta"
@@ -104,8 +109,6 @@ inGameMenu bet totalMoney playerHand dealerHand deckShuffled counter = do
 
       inGameMenu (bet * 2) (totalMoney - bet) _playerHand dealerHand _deckShuffled (counter + 1)
     "2" -> do
-      putStrLn $ "Valor Total: " ++ show totalMoney
-
       let _playerHand = (deckShuffled !! (counter + 1)) : playerHand
       let _deckShuffled = drop (counter + 1) deckShuffled
 
