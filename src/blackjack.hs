@@ -1,4 +1,4 @@
-module Blackjack (deck, shuffle) where
+module Blackjack (deck, shuffle, printHand) where
 import System.Random
 import Data.Array.IO
 import Control.Monad
@@ -27,3 +27,34 @@ shuffle xs = do
     n = length xs
     newArray :: Int -> [a] -> IO (IOArray Int a)
     newArray n xs =  newListArray (1,n) xs
+
+--Arte baseada no site
+-- https://ascii.co.uk/art/cards
+printHand :: [([Char], Char)] -> String
+printHand [] = ""
+printHand (h:t)
+    | suit == "Hearts" =  ".------.\n\
+                          \|" ++ [(snd h)] ++ "_  _ |\n\
+                          \|( \\/ )|\n\
+                          \| \\  / |\n\
+                          \|  \\/ " ++ [(snd h)] ++"|\n\
+                          \`------´\n" ++ (printHand t)
+    | suit == "Diamonds" =  ".------.\n\
+                            \|" ++ [(snd h)] ++ " /\\  |\n\
+                            \| /  \\ |\n\
+                            \| \\  / |\n\
+                            \|  \\/ " ++ [(snd h)] ++"|\n\
+                            \`------´\n" ++ (printHand t)
+    | suit == "Clubs" =  ".------.\n\
+                        \|" ++ [(snd h)] ++ " _   |\n\
+                        \| ( )  |\n\
+                        \|(_x_) |\n\
+                        \|  Y  " ++ [(snd h)] ++"|\n\
+                        \`------´\n" ++ (printHand t)
+    | suit == "Spades" =  ".------.\n\
+                          \|" ++ [(snd h)] ++ " .   |\n\
+                          \| / \\  |\n\
+                          \|(_,_) |\n\
+                          \|  I  " ++ [(snd h)] ++ "|\n\
+                          \`------'\n" ++ (printHand t)
+    where suit = fst h
