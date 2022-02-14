@@ -6,7 +6,7 @@ import Control.Monad
 suits :: [[Char]]
 suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 values :: [Char]
-values = ['1'..'9'] ++ ['A', 'J', 'Q', 'K']
+values = ['2'..'9'] ++ ['A', 'J', 'Q', 'K']
 
 deck :: [([Char], Char)]
 deck = [(x, y) | x <- suits, y <- values]
