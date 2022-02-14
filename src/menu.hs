@@ -190,6 +190,6 @@ getHandValue = foldr ((+) . assignValueToCard) 0
 assignValueToCard :: (a, Char) -> Int
 assignValueToCard x = do
   case (snd x) of
-    y | y == 'J' || y == 'Q' || y == 'K' -> 10
+    y | y == 'J' || y == 'Q' || y == 'K' || y == 'X' -> 10
     'A' -> 1
     _ -> digitToInt (snd x)
