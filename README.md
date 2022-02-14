@@ -26,9 +26,9 @@ Descreva o seu projeto em linhas gerais.
 
 ![Iniciando](./assets/blackjack1.png)
 
-- Finaizando jogo
+- Finalizando jogo
 
-![Finaizando](./assets/blackjack2.png)
+![Finalizando](./assets/blackjack2.png)
 
 ## Instalação 
 **Linguagens**: Haskell<br>
