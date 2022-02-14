@@ -10,7 +10,9 @@ import System.Random
 
 
 main :: IO ()
-main = mainMenu 2000
+main = do
+  putStrLn "Bem-vindo ao BlackJack\n"
+  mainMenu 2000
 
 mainMenu :: Int -> IO ()
 mainMenu money = do
@@ -27,7 +29,7 @@ mainMenu money = do
 
 startGameMenu :: Int -> IO ()
 startGameMenu money = do
-  putStrLn $ "Seu dinheiro: " ++ show money
+  putStrLn $ "Seu dinheiro: $ " ++ show money
   putStrLn "\nEscolha sua acao: "
   putStrLn "1 - Apostar 10"
   putStrLn "2 - Apostar 50"
@@ -90,12 +92,12 @@ startGameMenu money = do
 
 inGameMenu :: Int -> Int -> [([Char], Char)] -> [([Char], Char)] -> [([Char], Char)] -> IO ()
 inGameMenu bet totalMoney playerHand dealerHand deckShuffled = do
-  putStrLn $ "Sua mão " ++ show playerHand
-  putStrLn $ "Mão do dealer " ++ show dealerHand
+  putStrLn $ "\nSua mão:\n" ++ (printHand playerHand)
+  putStrLn $ "Mão do dealer:\n" ++ (printHand dealerHand)
 
   compareHandValuesOverOrEqual21 playerHand dealerHand bet totalMoney
-  putStrLn $ "Seu dinheiro: " ++ show totalMoney
-  putStrLn "\nEscolha sua acao: "
+  putStrLn $ "Seu dinheiro: $ " ++ show totalMoney
+  putStrLn $ "\n----------------------------------------\n" ++ "Escolha sua acao: "
   putStrLn "1 - Dobrar aposta"
   putStrLn "2 - Comprar carta"
   putStrLn "3 - Fechar mao\n"
@@ -154,7 +156,7 @@ compareHandValuesOverOrEqual21 hand dealerHand bet totalMoney = do
       if handValueDealer > 21 || handValue == 21
         then do
           putStrLn "Você venceu\n"
-          putStrLn $ "Seu dinheiro " ++ show (totalMoney + (2 * bet)) ++ "\n"
+          putStrLn $ "Seu dinheiro: $ " ++ show (totalMoney + (2 * bet)) ++ "\n"
           mainMenu (totalMoney + (2 * bet))
           exitSuccess
         else do
@@ -173,12 +175,12 @@ compareHandValues hand dealerHand bet totalMoney = do
       if handValue > handValueDealer
         then do
           putStrLn "Você venceu\n"
-          putStrLn $ "Seu dinheiro " ++ show (totalMoney + (2 * bet)) ++ "\n"
+          putStrLn $ "Seu dinheiro: $ " ++ show (totalMoney + (2 * bet)) ++ "\n"
           mainMenu (totalMoney + (2 * bet))
           exitSuccess
         else do
           putStrLn "Empate\n"
-          putStrLn $ "Seu dinheiro " ++ show (totalMoney + bet) ++ "\n"
+          putStrLn $ "Seu dinheiro: $ " ++ show (totalMoney + bet) ++ "\n"
           mainMenu (totalMoney + bet)
           exitSuccess
 
