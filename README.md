@@ -47,7 +47,7 @@ ghc --make -o menu menu.hs -o blackjack blackjack.hs
 Explique como usar seu projeto, caso haja algum passo a passo após o comando de execução.
 
 ## Vídeo
-![Apresentação](https://github.com/UnBParadigmas2021-2/2021.2_G5_Funcional_Blackjack/blob/master/media/apresentacao.mp4)
+[Apresentação](https://github.com/UnBParadigmas2021-2/2021.2_G5_Funcional_Blackjack/blob/master/media/apresentacao.mp4)
 
 ## Fontes
 
