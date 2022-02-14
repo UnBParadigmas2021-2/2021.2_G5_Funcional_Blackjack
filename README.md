@@ -28,7 +28,7 @@ Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcioname
 **Tecnologias**: GHCI<br>
 
 - Instalar GHC para seu computador.
-- Rodar o seguinte comando.
+- Rodar o seguinte comando dentro da pasta `src`.
 
 ```
 ghc --make -o menu menu.hs -o blackjack blackjack.hs
