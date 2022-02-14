@@ -23,10 +23,13 @@ Descreva o seu projeto em linhas gerais.
 ## Screenshots
 
 - Iniciando Jogo
+
 ![Iniciando](./assets/blackjack1.png)
 
 - Finaizando jogo
+
 ![Finaizando](./assets/blackjack2.png)
+
 ## Instalação 
 **Linguagens**: Haskell<br>
 **Tecnologias**: GHCI<br>
