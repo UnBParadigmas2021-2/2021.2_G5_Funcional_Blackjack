@@ -27,14 +27,14 @@ Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcioname
 **Linguagens**: Haskell<br>
 **Tecnologias**: GHCI<br>
 
-- Instalar GHCI para seu computador
-- Iniciar GHCI e carregar módulo do blackjack e do menu
+- Instalar GHC para seu computador.
+- Rodar o seguinte comando.
 
 ```
-:load blackjack.hs menu.hs
+ghc --make -o menu menu.hs -o blackjack blackjack.hs
 ```
 
-- Dentro do GHCI, chame a função main
+- Executar o binario `blackjack` gerado.
 
 ## Uso 
 Explique como usar seu projeto, caso haja algum passo a passo após o comando de execução.
