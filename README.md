@@ -21,8 +21,12 @@
 Descreva o seu projeto em linhas gerais. 
 
 ## Screenshots
-Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcionamento.
 
+- Iniciando Jogo
+![Iniciando](./assets/blackjack1.png)
+
+- Finaizando jogo
+![Finaizando](./assets/blackjack2.png)
 ## Instalação 
 **Linguagens**: Haskell<br>
 **Tecnologias**: GHCI<br>
@@ -43,4 +47,5 @@ Explique como usar seu projeto, caso haja algum passo a passo após o comando de
 Adicione 1 ou mais vídeos com a execução do projeto.
 
 ## Fontes
-Caso utilize materiais de terceiros, referencie-os adequadamente.
+
+- [Função de embaralhar](https://wiki.haskell.org/Random_shuffle) 
