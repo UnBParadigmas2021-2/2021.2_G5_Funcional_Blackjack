@@ -51,7 +51,7 @@ startGameMenu money = do
           mainMenu money
       else do
         putStrLn $ "Apostando: " ++ show 10
-        inGameMenu 10 (money -10) playerHand dealerHand _deckShuffled counter
+        inGameMenu 10 (money -10) playerHand dealerHand _deckShuffled
     "2" -> do
       if (money - 50) < 0
         then do
@@ -59,7 +59,7 @@ startGameMenu money = do
           startGameMenu money
       else do
         putStrLn $ "Apostando: " ++ show 50
-        inGameMenu 50 (money - 50) playerHand dealerHand _deckShuffled counter
+        inGameMenu 50 (money - 50) playerHand dealerHand _deckShuffled
     "3" -> do
       if (money - 100) < 0
         then do
@@ -67,7 +67,7 @@ startGameMenu money = do
           startGameMenu money
       else do
         putStrLn $ "Apostando: " ++ show 100
-        inGameMenu 100 (money - 100) playerHand dealerHand _deckShuffled counter
+        inGameMenu 100 (money - 100) playerHand dealerHand _deckShuffled
     "4" -> do
       if (money - 250) < 0
         then do
@@ -75,7 +75,7 @@ startGameMenu money = do
           startGameMenu money
       else do
         putStrLn $ "Apostando: " ++ show 250
-        inGameMenu 250 (money - 250) playerHand dealerHand _deckShuffled counter
+        inGameMenu 250 (money - 250) playerHand dealerHand _deckShuffled
     "5" -> do
       if (money - 500) < 0
         then do
@@ -83,13 +83,13 @@ startGameMenu money = do
           startGameMenu money
       else do
         putStrLn $ "Apostando: " ++ show 500
-        inGameMenu 500 (money - 500) playerHand dealerHand _deckShuffled counter
+        inGameMenu 500 (money - 500) playerHand dealerHand _deckShuffled
     "6" -> do
         putStrLn "Voltando para o menu...\n"
         mainMenu money
 
-inGameMenu :: Int -> Int -> [([Char], Char)] -> [([Char], Char)] -> [([Char], Char)] -> Int -> IO ()
-inGameMenu bet totalMoney playerHand dealerHand deckShuffled counter = do
+inGameMenu :: Int -> Int -> [([Char], Char)] -> [([Char], Char)] -> [([Char], Char)] -> IO ()
+inGameMenu bet totalMoney playerHand dealerHand deckShuffled = do
   putStrLn $ "Sua mão " ++ show playerHand
   putStrLn $ "Mão do dealer " ++ show dealerHand
 
@@ -106,25 +106,22 @@ inGameMenu bet totalMoney playerHand dealerHand deckShuffled counter = do
       if (totalMoney - bet) < 0
         then do
           putStrLn "Dinheiro insuficiente para dobrar a aposta"
-          inGameMenu bet totalMoney playerHand dealerHand deckShuffled (counter + 1)
+          inGameMenu bet totalMoney playerHand dealerHand deckShuffled
         else do
           putStrLn $ "Dobrando aposta... Valor atual: " ++ show (bet * 2)
-          let _playerHand = (deckShuffled !! (counter + 1)) : playerHand
-          let _deckShuffled = drop (counter + 1) deckShuffled
-          inGameMenu (bet * 2) (totalMoney - bet) _playerHand dealerHand _deckShuffled (counter + 1)
+          let _playerHand = head deckShuffled : playerHand
+          inGameMenu (bet * 2) (totalMoney - bet) _playerHand dealerHand (drop 1 deckShuffled)
     "2" -> do
-      let _playerHand = (deckShuffled !! (counter + 1)) : playerHand
-      let _deckShuffled = drop (counter + 1) deckShuffled
+      let _playerHand = head deckShuffled : playerHand
 
       let handValuePlayer = getHandValue _playerHand
       let handValueDealer = getHandValue dealerHand
       if handValueDealer < handValuePlayer
         then do
-          let _dealerHand = (deckShuffled !! (counter + 1)) : dealerHand
-          let _deckShuffled = drop (counter + 1) deckShuffled
-          inGameMenu bet totalMoney _playerHand _dealerHand _deckShuffled (counter + 1)
+          let _dealerHand = head (drop 1 deckShuffled) : dealerHand
+          inGameMenu bet totalMoney _playerHand _dealerHand (drop 2 deckShuffled)
         else do
-          inGameMenu bet totalMoney _playerHand dealerHand _deckShuffled (counter + 1)
+          inGameMenu bet totalMoney _playerHand dealerHand (drop 1 deckShuffled)
 
     "3" -> do
       putStrLn "Fechando mao...\n"
@@ -133,8 +130,7 @@ inGameMenu bet totalMoney playerHand dealerHand deckShuffled counter = do
       let handValueDealer = getHandValue dealerHand
       if handValueDealer < handValuePlayer
         then do
-          let _dealerHand = (deckShuffled !! (counter + 1)) : dealerHand
-          let _deckShuffled = drop (counter + 1) deckShuffled
+          let _dealerHand = head deckShuffled : dealerHand
           compareHandValuesOverOrEqual21 playerHand _dealerHand bet totalMoney
           compareHandValues playerHand _dealerHand bet totalMoney
           mainMenu totalMoney
@@ -191,15 +187,7 @@ getHandValue = foldr ((+) . assignValueToCard) 0
 
 assignValueToCard :: (a, Char) -> Int
 assignValueToCard x = do
-  let bool = isFamilyCard (snd x)
-  case bool of
-    True -> 10
-    False -> digitToInt (snd x)
-
-isFamilyCard :: Char -> Bool
-isFamilyCard x
-  | x == 'A' = True
-  | x == 'J' = True
-  | x == 'Q' = True
-  | x == 'K' = True
-  | otherwise = False
+  case (snd x) of
+    y | y == 'J' || y == 'Q' || y == 'K' -> 10
+    'A' -> 1
+    _ -> digitToInt (snd x)
