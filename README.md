@@ -18,7 +18,8 @@
 |17/0164411|Victor Amaral Cerqueira                 |
 
 ## Sobre 
-Descreva o seu projeto em linhas gerais. 
+Esse projeto simula um jogo de Blackjack (também conhecido como 21). Tivemos como base esse jogo [aqui](https://www.247blackjack.com/). O programa foi desenvolvido em Haskell.  
+Nas próximas seções é explicado como executar o programa, além de apresentar um vídeo com explicações mais detalhadas sobre o projeto
 
 ## Screenshots
 
