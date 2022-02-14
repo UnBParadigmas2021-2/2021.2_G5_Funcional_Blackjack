@@ -52,3 +52,4 @@ Adicione 1 ou mais vídeos com a execução do projeto.
 ## Fontes
 
 - [Função de embaralhar](https://wiki.haskell.org/Random_shuffle) 
+- [Ascii](https://ascii.co.uk/art/cards)
